@@ -1,4 +1,4 @@
-import app.auth as auth
+import application.auth as auth
 
 # Global variable to store API token
 apiToken = ""
@@ -7,7 +7,8 @@ apiToken = ""
 while True:
     print("\nWelcome to the CLI:")
     print("1. Register")
-    print("2. Exit")
+    print("2. Login")
+    print("3. Exit")
 
     action = input("Select an option: ")
 
@@ -19,6 +20,12 @@ while True:
         if response != 'Registration failed' :
             apiToken = response
     elif action == "2":
+        email = input("Enter your email: ")
+        password = input("Enter your password: ")
+        response = auth.login(email,password)
+        if response != 'Registration failed' :
+            apiToken = response
+    elif action == "3":
         print("Exiting the program.")
         break
     else:
