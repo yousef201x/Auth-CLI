@@ -78,7 +78,7 @@ def login(email, password):
         saveApiToken(apiToken)  # Save API token to file
         return apiToken  # Return API token
     else:  # Login failed
-        print("Login failed")
+        print("The provided credentials are incorrect.")
 
 def logout(token) :
     url = "http://127.0.0.1:8000/api/logout" 
