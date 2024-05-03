@@ -4,6 +4,10 @@ from colorama import init, Fore, Style
 # Initialize colorama
 init(autoreset=True)
 
+# Back message
+def backAble() :
+    return print(Fore.RED + "Enter 'back' at any time to return to the main menu.")
+
 # Global variable to store API token
 apiToken = auth.getApiToken()  # Retrieve API token from the saved file
 
@@ -20,7 +24,8 @@ while True:
         if action == "1":  # Register a new user
             while True:
                 print("\n" + Fore.GREEN + "Register:")
-                print(Fore.MAGENTA + "Enter 'back' at any time to return to the main menu.")
+                # Display back message
+                backAble()
                 name = input("Enter your name: ")
                 if name.lower() == "back":
                     break
@@ -37,7 +42,8 @@ while True:
         elif action == "2":  # Login if registration failed
             while True:
                 print("\n" + Fore.CYAN + "Login:")
-                print(Fore.MAGENTA + "Enter 'back' at any time to return to the main menu.")
+                # Display back message
+                backAble()
                 email = input("Enter your email: ")
                 if email.lower() == "back":
                     break
@@ -56,20 +62,24 @@ while True:
 
     else:  # User is already authenticated
         userInfo = auth.getUserData(apiToken)  # Get user data using the API token
-        print("\n" + Fore.GREEN + "Welcome back", userInfo['name'], '!')
-        while True:
-            print("1.")
-            print("2.")
-            print(Fore.RED + "3. Logout")
+        print("\n" + Fore.GREEN + "Welcome back", userInfo['name'], '!') # Dispaly welcome message
+        while True: # Main menu
+            print("1. " + Fore.CYAN + "My profile")
+            print("2. "+Fore.RED + "Logout")
 
-            action = input(Style.RESET_ALL + "Select an option: ")
+            action = input(Style.RESET_ALL + "Select an option: ") # Option inout
 
             if action == "1" :
-                # Your code for option 1
-                pass
+                while True : # Display user info
+                    print("\n" + Fore.YELLOW + "Welcome to My profile:")
+                    backAble()
+                    print("1. " + Fore.GREEN + "Name :" + userInfo['name'])
+                    print("2. " + Fore.GREEN + "Email : " +userInfo['email'])
+                    print("2. " + Fore.GREEN + "Account created at : " +userInfo['created_at'])
+                    
+                    action = input("Enter 'back' to go back: ")
+                    if action.lower() == 'back' :
+                        break
             elif action == "2" :
-                # Your code for option 2
-                pass
-            elif action == "3" :
                 response = auth.logout(apiToken)
                 break

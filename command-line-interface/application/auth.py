@@ -87,9 +87,9 @@ def logout(token) :
 
     response = requests.post(url, headers=headers)  # Send GET request with token
 
-    if response.status_code == 200:
-        clearApiTokenFile()
-        return True
+    if response.status_code == 200: # Successful logout
+        clearApiTokenFile() # Delete Api token
+        return True # Successful message
     else:
-        return False 
+        return False #faild message
 
